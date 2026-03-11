@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Vasundhare Agro Solutions – Glassy Canvas with Rain Droplets</title>
+<title>Vasundhare Agro Solutions – Realistic Rain on Glass</title>
 <style>
 * {
   margin: 0;
@@ -16,10 +16,9 @@ body {
   position: relative;
   overflow-x: hidden;
   min-height: 100vh;
-  background: linear-gradient(145deg, #7ec8e0 0%, #a5d8e8 100%);
 }
 
-/* ===== GLASSY CANVAS BACKGROUND ===== */
+/* ===== DARK BACKGROUND WITH RAIN IMAGE ===== */
 .glass-canvas {
   position: fixed;
   top: 0;
@@ -28,178 +27,160 @@ body {
   height: 100%;
   z-index: 0;
   overflow: hidden;
-  background: linear-gradient(135deg, 
-    rgba(200, 230, 250, 0.6) 0%, 
-    rgba(160, 210, 240, 0.7) 50%,
-    rgba(180, 220, 245, 0.6) 100%);
-  backdrop-filter: blur(12px);
-  box-shadow: inset 0 0 60px rgba(255, 255, 255, 0.6);
+  background-image: url("images/rainbg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-color: #1a2a3a; /* Fallback dark color */
 }
 
-/* Glass texture overlay - creates that frosted glass look */
-.glass-canvas::before {
+/* Optional subtle overlay to darken slightly if needed */
+.glass-canvas::after {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: 
-    repeating-linear-gradient(45deg,
-      rgba(255, 255, 255, 0.1) 0px,
-      rgba(255, 255, 255, 0.1) 2px,
-      rgba(255, 255, 255, 0.05) 2px,
-      rgba(255, 255, 255, 0.05) 4px);
+  background: rgba(0, 0, 0, 0.2);
   pointer-events: none;
-}
-
-/* Glass shine effect */
-.glass-canvas::after {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  right: -50%;
-  bottom: -50%;
-  background: radial-gradient(circle at 30% 30%, 
-    rgba(255, 255, 255, 0.3) 0%, 
-    transparent 60%);
-  pointer-events: none;
-  animation: glass-shimmer 15s infinite alternate;
-}
-
-@keyframes glass-shimmer {
-  0% { transform: translate(0, 0) rotate(0deg); opacity: 0.3; }
-  50% { transform: translate(2%, 2%) rotate(1deg); opacity: 0.5; }
-  100% { transform: translate(-2%, -2%) rotate(-1deg); opacity: 0.3; }
 }
 
 /* ===== REALISTIC RAINDROPS ===== */
 .raindrop {
   position: absolute;
-  background: linear-gradient(145deg, 
-    rgba(255, 255, 255, 0.95) 0%, 
-    rgba(230, 245, 255, 0.9) 80%);
-  border-radius: 60% 40% 50% 50% / 40% 50% 60% 50%;
-  transform: rotate(-10deg);
-  box-shadow: 
-    0 5px 15px rgba(255, 255, 255, 0.4),
-    inset -3px -5px 10px rgba(0, 0, 0, 0.05),
-    inset 3px 5px 20px rgba(255, 255, 255, 0.9);
+  background: radial-gradient(
+    circle at 30% 30%,
+    rgba(255,255,255,0.95) 0%,
+    rgba(255,255,255,0.6) 20%,
+    rgba(200,220,255,0.25) 45%,
+    rgba(150,180,255,0.15) 60%,
+    rgba(255,255,255,0.05) 75%,
+    rgba(255,255,255,0.0) 100%
+  );
+  border-radius: 50%;
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  box-shadow:
+    inset -4px -6px 10px rgba(0,0,0,0.15),
+    inset 4px 6px 12px rgba(255,255,255,0.8),
+    0 2px 6px rgba(255,255,255,0.6);
   pointer-events: none;
   z-index: 1;
-  filter: blur(0.5px);
+  filter: drop-shadow(0 0 2px rgba(255,255,255,0.3));
 }
 
 /* Main highlight (top-left) */
 .raindrop::before {
-  content: '';
+  content: "";
   position: absolute;
-  top: 10%;
+  top: 8%;
   left: 15%;
-  width: 25%;
-  height: 20%;
-  background: radial-gradient(circle at 30% 30%, 
-    rgba(255, 255, 255, 1) 0%, 
-    rgba(255, 255, 255, 0.4) 70%);
+  width: 35%;
+  height: 30%;
+  background: radial-gradient(
+    circle,
+    rgba(255,255,255,1) 0%,
+    rgba(255,255,255,0.5) 50%,
+    transparent 80%
+  );
   border-radius: 50%;
-  filter: blur(1px);
 }
 
 /* Secondary highlight (bottom-right) */
 .raindrop::after {
-  content: '';
+  content: "";
   position: absolute;
-  bottom: 15%;
-  right: 15%;
-  width: 15%;
-  height: 15%;
-  background: radial-gradient(circle at 70% 70%, 
-    rgba(255, 255, 255, 0.9) 0%, 
-    rgba(255, 255, 255, 0.2) 80%);
+  bottom: 10%;
+  right: 10%;
+  width: 20%;
+  height: 20%;
+  background: radial-gradient(
+    circle,
+    rgba(255,255,255,0.8) 0%,
+    transparent 70%
+  );
   border-radius: 50%;
-  filter: blur(1px);
 }
 
-/* Raindrop streak effect for movement */
+/* Refraction streak (adds realism) */
 .raindrop-streak {
   position: absolute;
   background: linear-gradient(180deg, 
-    rgba(255, 255, 255, 0.3) 0%, 
+    rgba(255, 255, 255, 0.4) 0%, 
+    rgba(255, 255, 255, 0.1) 50%,
     transparent 100%);
-  width: 2px;
-  height: 15px;
-  border-radius: 1px;
+  width: 3px;
+  height: 25px;
+  border-radius: 2px;
   filter: blur(1px);
   pointer-events: none;
   z-index: 0;
+  transform: rotate(-5deg);
+  opacity: 0.5;
 }
 
 /* Slow drifting down animation */
 @keyframes rain-drift {
   0% {
-    transform: translate(0, -10%) rotate(-5deg) scale(1);
+    transform: translate(0, -10%) scale(1);
   }
   20% {
-    transform: translate(5%, 15%) rotate(-8deg) scale(1.02);
+    transform: translate(5%, 15%) scale(1.02);
   }
   40% {
-    transform: translate(-5%, 35%) rotate(-3deg) scale(0.98);
+    transform: translate(-5%, 35%) scale(0.98);
   }
   60% {
-    transform: translate(8%, 55%) rotate(-10deg) scale(1.01);
+    transform: translate(8%, 55%) scale(1.01);
   }
   80% {
-    transform: translate(-3%, 75%) rotate(-6deg) scale(0.99);
+    transform: translate(-3%, 75%) scale(0.99);
   }
   100% {
-    transform: translate(2%, 95%) rotate(-7deg) scale(1);
+    transform: translate(2%, 95%) scale(1);
   }
 }
 
 @keyframes slow-rain {
   0% {
-    transform: translate(0, -5%) rotate(-2deg);
+    transform: translate(0, -5%);
   }
   100% {
-    transform: translate(10%, 105%) rotate(-12deg);
+    transform: translate(10%, 105%);
   }
 }
 
 @keyframes gentle-rain {
   0% {
-    transform: translate(0, 0) rotate(-5deg);
+    transform: translate(0, 0);
   }
   100% {
-    transform: translate(-8%, 110%) rotate(-8deg);
+    transform: translate(-8%, 110%);
   }
 }
 
-/* ===== GLASSY COMPONENTS - ALL WEBSITE ELEMENTS ===== */
+/* ===== GLASSY COMPONENTS - NO HEAVY BLUR, JUST TRANSPARENCY ===== */
 .merged-header,
 .hero,
 section,
 footer {
   position: relative;
   z-index: 2;
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  box-shadow: 
-    0 8px 32px rgba(0, 0, 0, 0.1),
-    inset 0 0 30px rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
 
 /* ===== MERGED HEADER + NAVBAR ===== */
 .merged-header {
-  background: rgba(10, 50, 30, 0.35);
+  background: rgba(0, 0, 0, 0.4);
   background-image: url("images/navbg.png");
   background-size: cover;
   background-position: center;
   background-blend-mode: overlay;
   color: white;
   padding: 0.4rem 2rem 0rem 2rem;
-  border-bottom: 4px solid rgba(46, 139, 87, 0.7);
+  border-bottom: 4px solid rgba(46, 139, 87, 0.8);
   position: sticky;
   top: 0;
   z-index: 100;
@@ -217,14 +198,14 @@ footer {
   width: auto;
   display: block;
   margin-right: 0.2rem;
-  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2));
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.4));
 }
 
 .title {
   font-size: 28px;
   font-weight: bold;
   white-space: nowrap;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
 }
 
 .nav-links {
@@ -239,33 +220,32 @@ footer {
   text-decoration: none;
   font-weight: bold;
   font-size: 18px;
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(0, 0, 0, 0.5);
   padding: 8px 14px;
   border-radius: 12px;
   transition: all 0.3s ease;
   white-space: nowrap;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .nav-links a:hover {
-  background: rgba(46, 139, 87, 0.4);
+  background: rgba(46, 139, 87, 0.7);
   transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(46, 139, 87, 0.3);
-  border-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 8px 25px rgba(46, 139, 87, 0.4);
+  border-color: rgba(255, 255, 255, 0.5);
 }
 
 /* ===== HERO AREA ===== */
 .hero {
   margin: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.4);
   position: relative;
   display: block;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
   border-radius: 20px;
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.2);
 }
 
 .hero img {
@@ -274,7 +254,6 @@ footer {
   object-fit: cover;
   display: block;
   opacity: 0.9;
-  mix-blend-mode: overlay;
 }
 
 .hero-overlay {
@@ -289,31 +268,26 @@ footer {
   align-items: center;
   padding: 25px 35px;
   pointer-events: none;
-  background: radial-gradient(circle at center, 
-    rgba(255,255,255,0.1) 0%, 
-    transparent 70%);
 }
 
 .banner-logo {
   pointer-events: auto;
   max-height: 150px;
   width: auto;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.3);
   border-radius: 30px;
   padding: 0.8rem 1.5rem 0.8rem 1.2rem;
-  backdrop-filter: blur(15px);
-  border: 1px solid rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.4);
   margin-bottom: 30px;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
 }
 
 .banner-logo img {
   height: 120px;
   width: auto;
   display: block;
-  filter: drop-shadow(0 8px 15px rgba(0,0,0,0.3));
+  filter: drop-shadow(0 8px 15px rgba(0,0,0,0.5));
   opacity: 1;
-  mix-blend-mode: normal;
 }
 
 .quote-wrapper {
@@ -324,21 +298,19 @@ footer {
 }
 
 .quote-card {
-  background: rgba(0, 70, 30, 0.55);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
+  background: rgba(0, 50, 20, 0.7);
   color: white;
   padding: 1.3rem 2.8rem;
   border-radius: 60px 60px 60px 60px;
   font-size: 2rem;
   font-weight: 600;
   text-align: center;
-  border: 1px solid rgba(255, 255, 255, 0.7);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
   max-width: 85%;
   line-height: 1.3;
   letter-spacing: 1px;
-  text-shadow: 2px 2px 8px #1a4a1a;
+  text-shadow: 2px 2px 8px #000000;
 }
 
 /* ===== SECTIONS ===== */
@@ -346,34 +318,33 @@ section {
   padding: 40px;
   text-align: center;
   scroll-margin-top: 100px;
-  background: rgba(255, 255, 255, 0.25);
-  backdrop-filter: blur(15px);
+  background: rgba(0, 0, 0, 0.3);
   margin: 20px;
   border-radius: 30px;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .green {
-  background: rgba(180, 230, 180, 0.25);
+  background: rgba(0, 40, 20, 0.35);
 }
 
 h2 {
-  color: #0a472a;
+  color: #ffffff;
   font-size: 2.2rem;
   margin-bottom: 1.8rem;
-  text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.5);
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
   font-weight: 700;
   letter-spacing: 1px;
 }
 
 h3 {
-  color: #0a5a2a;
+  color: #ffffff;
   font-size: 1.7rem;
   margin: 2rem 0 1.2rem 0;
   text-align: center;
   width: 100%;
-  text-shadow: 1px 1px 6px rgba(255, 255, 255, 0.5);
+  text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.5);
 }
 
 .services-container {
@@ -389,24 +360,23 @@ h3 {
   display: inline-block;
   width: 260px;
   margin: 0 0 20px 0;
-  background: rgba(255, 255, 255, 0.35);
+  background: rgba(0, 0, 0, 0.4);
   border-radius: 20px;
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
   padding: 15px;
   vertical-align: top;
   transition: all 0.4s ease;
   cursor: pointer;
   text-decoration: none;
   color: inherit;
-  backdrop-filter: blur(15px);
-  border: 1px solid rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .box:hover {
   transform: translateY(-15px) scale(1.03);
-  box-shadow: 0 25px 40px rgba(46, 139, 87, 0.3);
-  background: rgba(255, 255, 255, 0.45);
-  border-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 25px 40px rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.5);
+  border-color: rgba(255, 255, 255, 0.4);
 }
 
 .box img {
@@ -414,21 +384,20 @@ h3 {
   height: 200px;
   object-fit: cover;
   border-radius: 15px;
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .box p {
   margin-top: 15px;
   font-weight: bold;
-  color: #0a472a;
+  color: #ffffff;
   font-size: 1.2rem;
-  text-shadow: 1px 1px 4px rgba(255, 255, 255, 0.5);
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
 }
 
 footer {
-  background: rgba(31, 111, 61, 0.5);
-  backdrop-filter: blur(15px);
+  background: rgba(20, 60, 30, 0.6);
   color: white;
   text-align: center;
   padding: 20px;
@@ -437,9 +406,9 @@ footer {
   z-index: 2;
   margin: 20px;
   border-radius: 15px;
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-  text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
 }
 
 /* small screen tweaks */
@@ -483,7 +452,7 @@ footer {
 </head>
 <body>
 
-<!-- ===== GLASSY CANVAS WITH RAINDROPS ===== -->
+<!-- ===== DARK BACKGROUND WITH RAIN IMAGE ===== -->
 <div class="glass-canvas" id="glass-canvas"></div>
 
 <!-- ===== MERGED HEADER + NAVBAR ===== -->
@@ -519,7 +488,7 @@ footer {
 <!-- ===== ABOUT SECTION ===== -->
 <section id="about">
   <h2>About Us</h2>
-  <p style="max-width:800px; margin:0 auto; font-size:1.2rem; color:#0a2a1a;">
+  <p style="max-width:800px; margin:0 auto; font-size:1.2rem; color:#ffffff;">
     Vasundhare Agro Solutions is dedicated to nature, farming,
     and plant nursery development. We grow healthy plants, trees, and crops
     with love and care for Mother Earth.
@@ -582,7 +551,7 @@ footer {
 <!-- ===== CONTACT SECTION ===== -->
 <section id="contact">
   <h2>Contact</h2>
-  <p style="font-size:1.2rem; color:#0a2a1a;">
+  <p style="font-size:1.2rem; color:#ffffff;">
     Vasundhare Agro Solutions<br>
     Phone: 8088627244<br>
     Email: contact.vas@gmail.com <br>
@@ -612,10 +581,10 @@ document.querySelectorAll('.nav-links a').forEach(link => {
   });
 });
 
-// Create realistic raindrops on glass canvas
+// Create realistic raindrops on dark background
 function createRaindrops() {
   const canvas = document.getElementById('glass-canvas');
-  const numberOfDrops = 60;
+  const numberOfDrops = 50;
   
   // Clear existing drops
   canvas.innerHTML = '';
@@ -625,25 +594,25 @@ function createRaindrops() {
     const drop = document.createElement('div');
     drop.className = 'raindrop';
     
-    // Random size between 15px and 45px (smaller, more realistic)
-    const width = Math.random() * 20 + 12;
-    const height = width * (Math.random() * 0.5 + 1.2); // Taller than wide
+    // LARGER SIZE: between 20px and 55px
+    const width = Math.random() * 35 + 20;
+    const height = width * (Math.random() * 0.6 + 1.3); // Taller for realistic shape
     drop.style.width = width + 'px';
     drop.style.height = height + 'px';
     
-    // Random starting position (some off-screen top for gradual appearance)
+    // Random starting position
     drop.style.left = Math.random() * 100 + '%';
-    drop.style.top = (Math.random() * 30 - 20) + '%'; // Start above or at top
+    drop.style.top = (Math.random() * 30 - 20) + '%';
     
-    // Random animation duration between 25s and 50s (slow movement)
-    const duration = Math.random() * 25 + 30;
+    // Random animation duration between 25s and 45s
+    const duration = Math.random() * 20 + 30;
     drop.style.animationDuration = duration + 's';
     
     // Random animation delay
     drop.style.animationDelay = Math.random() * 15 + 's';
     
-    // Random opacity between 0.6 and 0.9 for visibility
-    drop.style.opacity = Math.random() * 0.3 + 0.6;
+    // Higher opacity for better visibility (0.7-0.95)
+    drop.style.opacity = Math.random() * 0.25 + 0.7;
     
     // Randomly assign different rain animations
     const animations = ['rain-drift', 'slow-rain', 'gentle-rain'];
@@ -652,21 +621,19 @@ function createRaindrops() {
     drop.style.animationTimingFunction = 'ease-in-out';
     drop.style.animationIterationCount = 'infinite';
     
-    // Add slight variation in rotation
-    drop.style.transform = `rotate(${Math.random() * 15 - 10}deg)`;
-    
     canvas.appendChild(drop);
     
-    // Add a tiny streak for some drops (optional)
-    if (Math.random() > 0.7) {
+    // Add streak for larger drops (adds realism)
+    if (width > 35 && Math.random() > 0.5) {
       const streak = document.createElement('div');
       streak.className = 'raindrop-streak';
-      streak.style.left = drop.style.left;
-      streak.style.top = drop.style.top;
-      streak.style.height = (height * 1.5) + 'px';
+      streak.style.left = (parseFloat(drop.style.left) + 0.5) + '%';
+      streak.style.top = (parseFloat(drop.style.top) + 10) + '%';
+      streak.style.height = (height * 1.2) + 'px';
+      streak.style.width = (width * 0.15) + 'px';
       streak.style.animation = drop.style.animation;
-      streak.style.animationDuration = duration * 0.8 + 's';
-      streak.style.opacity = 0.2;
+      streak.style.animationDuration = duration * 0.9 + 's';
+      streak.style.opacity = 0.4;
       canvas.appendChild(streak);
     }
   }
@@ -675,7 +642,7 @@ function createRaindrops() {
 // Create raindrops on page load
 window.addEventListener('load', createRaindrops);
 
-// Add new raindrops occasionally to maintain effect
+// Add new raindrops occasionally
 setInterval(() => {
   const canvas = document.getElementById('glass-canvas');
   const drops = canvas.children;
@@ -687,23 +654,23 @@ setInterval(() => {
     }
   }
   
-  // Add 2-3 new drops
+  // Add 2 new drops
   for (let j = 0; j < 2; j++) {
     const drop = document.createElement('div');
     drop.className = 'raindrop';
     
-    const width = Math.random() * 20 + 12;
-    const height = width * (Math.random() * 0.5 + 1.2);
+    const width = Math.random() * 35 + 20;
+    const height = width * (Math.random() * 0.6 + 1.3);
     drop.style.width = width + 'px';
     drop.style.height = height + 'px';
     
     drop.style.left = Math.random() * 100 + '%';
     drop.style.top = '-5%';
     
-    const duration = Math.random() * 25 + 30;
+    const duration = Math.random() * 20 + 30;
     drop.style.animationDuration = duration + 's';
     drop.style.animationDelay = '0s';
-    drop.style.opacity = Math.random() * 0.3 + 0.6;
+    drop.style.opacity = Math.random() * 0.25 + 0.7;
     
     const animations = ['rain-drift', 'slow-rain', 'gentle-rain'];
     const randomAnimation = animations[Math.floor(Math.random() * animations.length)];
@@ -711,11 +678,9 @@ setInterval(() => {
     drop.style.animationTimingFunction = 'ease-in-out';
     drop.style.animationIterationCount = 'infinite';
     
-    drop.style.transform = `rotate(${Math.random() * 15 - 10}deg)`;
-    
     canvas.appendChild(drop);
   }
-}, 5000); // Add new drops every 5 seconds
+}, 4000); // Add new drops every 4 seconds
 </script>
 
 </body>
