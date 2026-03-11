@@ -27,7 +27,7 @@ body {
   height: 100%;
   z-index: 0;
   overflow: hidden;
-  background-image: url("images/rainbg.png");
+  background-image: url("images/rainbg.jpg");
   background-size: cover;
   background-position: center;
   background-color: #1a2a3a; /* Fallback dark color */
@@ -159,7 +159,7 @@ body {
   }
 }
 
-/* ===== GLASSY COMPONENTS - NO HEAVY BLUR, JUST TRANSPARENCY ===== */
+/* ===== GLASSY COMPONENTS ===== */
 .merged-header,
 .hero,
 section,
@@ -171,7 +171,7 @@ footer {
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
 
-/* ===== MERGED HEADER + NAVBAR ===== */
+/* ===== MERGED HEADER + NAVBAR - MOBILE RESPONSIVE ===== */
 .merged-header {
   background: rgba(0, 0, 0, 0.4);
   background-image: url("images/navbg.png");
@@ -179,7 +179,7 @@ footer {
   background-position: center;
   background-blend-mode: overlay;
   color: white;
-  padding: 0.4rem 2rem 0rem 2rem;
+  padding: 0.5rem 1rem;
   border-bottom: 4px solid rgba(46, 139, 87, 0.8);
   position: sticky;
   top: 0;
@@ -189,30 +189,53 @@ footer {
 .header-nav-flex {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   flex-wrap: wrap;
-  gap: 1.2rem 2rem;
 }
 
 .logo {
-  height: 70px;
+  height: 60px;
   width: auto;
   display: block;
-  margin-right: 0.2rem;
   filter: drop-shadow(0 4px 6px rgba(0,0,0,0.4));
 }
 
 .title {
-  font-size: 28px;
+  font-size: 24px;
   font-weight: bold;
-  white-space: nowrap;
   text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  flex: 1;
+  margin-left: 10px;
 }
 
+/* Mobile menu toggle button */
+.menu-toggle {
+  display: none;
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+  z-index: 101;
+}
+
+.menu-toggle span {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background: white;
+  margin: 5px 0;
+  border-radius: 3px;
+  transition: 0.3s;
+}
+
+/* Navigation links container */
 .nav-links {
   display: flex;
   flex-wrap: wrap;
   gap: 0.8rem;
   margin-left: auto;
+  transition: all 0.3s ease;
 }
 
 .nav-links a {
@@ -411,41 +434,185 @@ footer {
   text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
 }
 
-/* small screen tweaks */
-@media (max-width: 750px) {
+/* ===== MOBILE RESPONSIVE STYLES ===== */
+@media screen and (max-width: 768px) {
   .header-nav-flex {
-    flex-direction: column;
-    align-items: start;
+    position: relative;
   }
-  .nav-links {
-    margin-left: 0;
-    width: 100%;
-    justify-content: center;
-  }
+
   .title {
+    font-size: 18px;
+    margin-left: 5px;
     white-space: normal;
-    font-size: 24px;
+    word-break: break-word;
   }
-  .hero-overlay {
+
+  .logo {
+    height: 45px;
+  }
+
+  /* Show menu toggle button */
+  .menu-toggle {
+    display: block;
+    margin-left: auto;
+  }
+
+  /* Hide nav links by default on mobile */
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(10px);
     padding: 15px;
+    border-radius: 0 0 20px 20px;
+    margin-top: 10px;
+    gap: 10px;
+    z-index: 100;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-top: none;
   }
-  .quote-card {
-    font-size: 1.4rem;
-    padding: 0.8rem 1.5rem;
+
+  /* Show nav links when active */
+  .nav-links.active {
+    display: flex;
   }
+
+  .nav-links a {
+    width: 100%;
+    text-align: center;
+    padding: 12px;
+    font-size: 16px;
+    background: rgba(46, 139, 87, 0.3);
+  }
+
+  .nav-links a:hover {
+    transform: translateY(-2px);
+  }
+
+  /* Menu toggle animation */
+  .menu-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+
+  .menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .menu-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+  }
+
+  /* Adjust hero for mobile */
+  .hero {
+    margin: 5px;
+  }
+
+  .hero img {
+    height: 300px;
+  }
+
+  .hero-overlay {
+    padding: 10px;
+  }
+
   .banner-logo {
     max-height: 100px;
-    margin-bottom: 20px;
+    padding: 0.5rem 1rem;
+    margin-bottom: 15px;
   }
+
   .banner-logo img {
     height: 70px;
   }
-  section {
-    margin: 10px;
-    padding: 20px;
+
+  .quote-card {
+    font-size: 1.2rem;
+    padding: 0.8rem 1.2rem;
+    border-radius: 40px;
   }
+
+  /* Adjust sections for mobile */
+  section {
+    padding: 20px 15px;
+    margin: 10px;
+  }
+
   h2 {
     font-size: 1.8rem;
+    margin-bottom: 1.2rem;
+  }
+
+  h3 {
+    font-size: 1.4rem;
+    margin: 1.5rem 0 1rem;
+  }
+
+  .services-container {
+    gap: 15px;
+  }
+
+  .box {
+    width: 100%;
+    max-width: 280px;
+    margin: 0 auto 15px;
+  }
+
+  .box img {
+    height: 180px;
+  }
+
+  footer {
+    margin: 10px;
+    padding: 15px;
+    font-size: 1rem;
+  }
+}
+
+/* Small phones */
+@media screen and (max-width: 480px) {
+  .header-nav-flex {
+    gap: 5px;
+  }
+
+  .logo {
+    height: 40px;
+  }
+
+  .title {
+    font-size: 16px;
+  }
+
+  .hero img {
+    height: 250px;
+  }
+
+  .banner-logo img {
+    height: 50px;
+  }
+
+  .quote-card {
+    font-size: 1rem;
+    padding: 0.6rem 1rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+  }
+
+  .box p {
+    font-size: 1rem;
+  }
+
+  section p {
+    font-size: 1rem !important;
   }
 }
 </style>
@@ -455,13 +622,21 @@ footer {
 <!-- ===== DARK BACKGROUND WITH RAIN IMAGE ===== -->
 <div class="glass-canvas" id="glass-canvas"></div>
 
-<!-- ===== MERGED HEADER + NAVBAR ===== -->
+<!-- ===== MERGED HEADER + NAVBAR WITH MOBILE MENU ===== -->
 <div class="merged-header">
   <div class="header-nav-flex">
     <img src="images/logo.png" class="logo" alt="Vasundhare logo">
     <div class="title">Vasundhare Agro Solutions</div>
 
-    <div class="nav-links">
+    <!-- Mobile menu toggle button -->
+    <div class="menu-toggle" id="menuToggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <!-- Navigation links -->
+    <div class="nav-links" id="navLinks">
       <a href="#home">Home</a>
       <a href="#about">About</a>
       <a href="#services">Services</a>
@@ -578,7 +753,34 @@ document.querySelectorAll('.nav-links a').forEach(link => {
         block: 'start'
       });
     }
+    
+    // Close mobile menu after clicking a link
+    if (window.innerWidth <= 768) {
+      document.getElementById('navLinks').classList.remove('active');
+      document.getElementById('menuToggle').classList.remove('active');
+    }
   });
+});
+
+// Mobile menu toggle
+const menuToggle = document.getElementById('menuToggle');
+const navLinks = document.getElementById('navLinks');
+
+menuToggle.addEventListener('click', function() {
+  navLinks.classList.toggle('active');
+  menuToggle.classList.toggle('active');
+});
+
+// Close menu when clicking outside
+document.addEventListener('click', function(event) {
+  if (window.innerWidth <= 768) {
+    const isClickInside = menuToggle.contains(event.target) || navLinks.contains(event.target);
+    
+    if (!isClickInside && navLinks.classList.contains('active')) {
+      navLinks.classList.remove('active');
+      menuToggle.classList.remove('active');
+    }
+  }
 });
 
 // Create realistic raindrops on dark background
@@ -681,6 +883,30 @@ setInterval(() => {
     canvas.appendChild(drop);
   }
 }, 4000); // Add new drops every 4 seconds
+
+// Handle window resize to reset mobile menu state
+window.addEventListener('resize', function() {
+  if (window.innerWidth > 768) {
+    navLinks.classList.remove('active');
+    menuToggle.classList.remove('active');
+    // Ensure nav links are visible on desktop
+    navLinks.style.display = 'flex';
+  } else {
+    // On mobile, hide by default (will be shown by toggle)
+    if (!navLinks.classList.contains('active')) {
+      navLinks.style.display = 'none';
+    } else {
+      navLinks.style.display = 'flex';
+    }
+  }
+});
+
+// Initial check for mobile/desktop
+if (window.innerWidth <= 768) {
+  navLinks.style.display = 'none';
+} else {
+  navLinks.style.display = 'flex';
+}
 </script>
 
 </body>
