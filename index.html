@@ -24,6 +24,9 @@ body {
   color: white;
   padding: 0.4rem 2rem 0rem 2rem;          /* top/right/left padding, bottom almost zero */
   border-bottom: 4px solid #2e8b57;         /* unified green border (was navbar border) */
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 /* flex container for logo + title + nav links (all in one row) */
@@ -167,6 +170,7 @@ body {
 section {
   padding: 40px;
   text-align: center;
+  scroll-margin-top: 100px;       /* Adds offset for sticky header when scrolling to sections */
 }
 
 .green {
@@ -197,6 +201,7 @@ h3 {
   margin: 0 auto;
 }
 
+/* Clickable card styles */
 .box {
   display: inline-block;
   width: 250px;
@@ -206,6 +211,15 @@ h3 {
   box-shadow: 0 0 10px gray;
   padding: 10px;
   vertical-align: top;
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
+
+.box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 
 .box img {
@@ -213,6 +227,12 @@ h3 {
   height: 200px;
   object-fit: cover;
   border-radius: 6px;
+}
+
+.box p {
+  margin-top: 10px;
+  font-weight: bold;
+  color: #2e8b57;
 }
 
 footer {
@@ -263,19 +283,19 @@ footer {
     <img src="images/logo.png" class="logo" alt="Vasundhare logo">
     <div class="title">Vasundhare Agro Solutions</div>
 
-    <!-- navigation links – now inside the same bar, no extra bar below -->
+    <!-- navigation links – now connected to page sections -->
     <div class="nav-links">
-      <a href="#">Home</a>
-      <a href="#">About</a>
-      <a href="#">Nursery</a>
-      <a href="#">Contact</a>
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#contact">Contact</a>
     </div>
   </div>
   <!-- the green border is on the container .merged-header, so no extra bar -->
 </div>
 
 <!-- ===== HERO BANNER with CENTERED LOGO and QUOTE ===== -->
-<div class="hero">
+<div id="home" class="hero">
   <img src="images/banner.png" alt="Green field / nursery banner">
   <!-- overlay content: logo centered above quote -->
   <div class="hero-overlay">
@@ -293,7 +313,7 @@ footer {
 </div>
 
 <!-- ===== ABOUT SECTION ===== -->
-<section>
+<section id="about">
   <h2>About Us</h2>
   <p style="max-width:800px; margin:0 auto; font-size:1.2rem;">
     Vasundhare Agro Solutions is dedicated to nature, farming,
@@ -302,61 +322,61 @@ footer {
   </p>
 </section>
 
-<!-- ===== NURSERY (plant boxes) - FIXED STRUCTURE ===== -->
-<section class="green">
+<!-- ===== SERVICES SECTION with CLICKABLE CARDS ===== -->
+<section id="services" class="green">
   <h2>Our Services</h2>
   
   <h3>Plants</h3>
   <div class="services-container">
-    <div class="box">
+    <a href="plants/fruit-plants.html" class="box">
       <img src="images/plant1.png" alt="fruit plants">
       <p>Fruit Plants</p>
-    </div>
-    <div class="box">
+    </a>
+    <a href="plants/flower-plants.html" class="box">
       <img src="images/plant2.png" alt="flower plants">
       <p>Flower Plants</p>
-    </div>
-    <div class="box">
+    </a>
+    <a href="plants/forest-trees.html" class="box">
       <img src="images/plant3.png" alt="forest trees">
       <p>Forest Trees</p>
-    </div>
+    </a>
   </div>
   
   <h3>Fertilizers</h3>
   <div class="services-container">
-    <div class="box">
-      <img src="images/organic-fertilizer.png" alt="Fertilizers">
+    <a href="fertilizers/organic.html" class="box">
+      <img src="images/organic-fertilizer.png" alt="Organic Fertilizers">
       <p>Organic Fertilizers</p>
-    </div>
-    <div class="box">
+    </a>
+    <a href="fertilizers/chemical.html" class="box">
       <img src="images/inorganic-fertilizer.png" alt="Chemical Fertilizers">
       <p>Chemical Fertilizers</p>
-    </div>
-    <div class="box">
+    </a>
+    <a href="fertilizers/bio.html" class="box">
       <img src="images/biofertilizer.png" alt="Bio Fertilizers">
       <p>Bio Fertilizers</p>
-    </div>
+    </a>
   </div>
   
   <h3>Agricultural Equipments</h3>
   <div class="services-container">
-    <div class="box">
-      <img src="images/equipment1.png" alt="Tractor">
+    <a href="equipment/tools.html" class="box">
+      <img src="images/equipment1.png" alt="Agricultural Tools">
       <p>Agricultural Tools</p>
-    </div>
-    <div class="box">
-      <img src="images/equipment2.png" alt="Plough">
+    </a>
+    <a href="equipment/gardening.html" class="box">
+      <img src="images/equipment2.png" alt="Gardening Tools">
       <p>Gardening Tools</p>
-    </div>
-    <div class="box">
-      <img src="images/equipment3.png" alt="Harvester">
+    </a>
+    <a href="equipment/others.html" class="box">
+      <img src="images/equipment3.png" alt="Other Equipment">
       <p>Others</p>
-    </div>
+    </a>
   </div>
 </section>
 
-<!-- ===== CONTACT ===== -->
-<section>
+<!-- ===== CONTACT SECTION ===== -->
+<section id="contact">
   <h2>Contact</h2>
   <p style="font-size:1.2rem;">
     Vasundhare Agro Solutions<br>
@@ -370,6 +390,35 @@ footer {
 <footer>
   © Vasundhare Agro Solutions
 </footer>
+
+<script>
+// Smooth scrolling for navigation links
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', function(e) {
+    e.preventDefault();
+    const targetId = this.getAttribute('href');
+    const targetElement = document.querySelector(targetId);
+    
+    if (targetElement) {
+      targetElement.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  });
+});
+
+// Make entire box clickable (fallback for any non-link boxes)
+document.querySelectorAll('.box').forEach(box => {
+  box.addEventListener('click', function(e) {
+    // If the box is already an <a> tag, let the default behavior work
+    if (this.tagName === 'A') return;
+    
+    // For any boxes that might not be links, you can add custom behavior here
+    console.log('Box clicked:', this.querySelector('p').textContent);
+  });
+});
+</script>
 
 </body>
 </html>
