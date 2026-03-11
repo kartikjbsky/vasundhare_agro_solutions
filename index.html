@@ -179,11 +179,28 @@ h2 {
   margin-bottom: 1.5rem;
 }
 
-/* plant boxes */
+h3 {
+  color: #1f6f3d;
+  font-size: 1.5rem;
+  margin: 2rem 0 1rem 0;
+  text-align: center;
+  width: 100%;
+}
+
+/* plant boxes container - helps with layout */
+.services-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
 .box {
   display: inline-block;
   width: 250px;
-  margin: 15px;
+  margin: 0 0 20px 0;
   background: white;
   border-radius: 10px;
   box-shadow: 0 0 10px gray;
@@ -285,29 +302,56 @@ footer {
   </p>
 </section>
 
-<!-- ===== NURSERY (plant boxes) ===== -->
+<!-- ===== NURSERY (plant boxes) - FIXED STRUCTURE ===== -->
 <section class="green">
   <h2>Our Services</h2>
+  
   <h3>Plants</h3>
-  <div class="box">
-    <img src="plant1.jpg" alt="fruit plants">
-    <p>Fruit Plants</p>
-  </div>
-  <div class="box">
-    <img src="plant2.png" alt="flower plants">
-    <p>Flower Plants</p>
-  </div>
-  <div class="box">
-    <img src="plant3.png" alt="forest trees">
-    <p>Forest Trees</p>
-  <h3>Fertilizers</h3>
-  <div class="box">
-    <img src="fertilizers.png" alt="Fertilizers">
-    <p>Fertilizers</p>
-  <h3>Agriculturel Equipments</h3>
+  <div class="services-container">
     <div class="box">
-    <img src="fertilizers.png" alt="Fertilizers">
-    <p>Fertilizers</p>
+      <img src="plant1.jpg" alt="fruit plants">
+      <p>Fruit Plants</p>
+    </div>
+    <div class="box">
+      <img src="plant2.png" alt="flower plants">
+      <p>Flower Plants</p>
+    </div>
+    <div class="box">
+      <img src="plant3.png" alt="forest trees">
+      <p>Forest Trees</p>
+    </div>
+  </div>
+  
+  <h3>Fertilizers</h3>
+  <div class="services-container">
+    <div class="box">
+      <img src="fertilizers.png" alt="Fertilizers">
+      <p>Organic Fertilizers</p>
+    </div>
+    <div class="box">
+      <img src="fertilizers.png" alt="Chemical Fertilizers">
+      <p>Chemical Fertilizers</p>
+    </div>
+    <div class="box">
+      <img src="fertilizers.png" alt="Bio Fertilizers">
+      <p>Bio Fertilizers</p>
+    </div>
+  </div>
+  
+  <h3>Agricultural Equipments</h3>
+  <div class="services-container">
+    <div class="box">
+      <img src="equipment1.png" alt="Tractor">
+      <p>Tractors</p>
+    </div>
+    <div class="box">
+      <img src="equipment2.png" alt="Plough">
+      <p>Ploughs</p>
+    </div>
+    <div class="box">
+      <img src="equipment3.png" alt="Harvester">
+      <p>Harvesters</p>
+    </div>
   </div>
 </section>
 
@@ -317,7 +361,7 @@ footer {
   <p style="font-size:1.2rem;">
     Vasundhare Agro Solutions<br>
     Phone: 8088627244<br>
-    Email: contact.vas@gamil.com <br>
+    Email: contact.vas@gmail.com <br>
     Address: Kondadakluli, Honavar
   </p>
 </section>
